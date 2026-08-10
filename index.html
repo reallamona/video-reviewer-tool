@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -13,279 +12,286 @@
 
     <title>Video Reviewer</title>
 
-    <link rel="stylesheet" href="css/style.css">
-
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 
 </head>
+
 
 <body>
 
 
     <!-- =========================
-         Video Workspace
+         Header
     ========================= -->
 
-    <section class="viewer">
+    <header>
 
+        <h1>
+            Video Reviewer
+        </h1>
 
-        <!-- Video Sources -->
-
-        <section class="video-sources">
-
-            <input
-                type="file"
-                id="videoUpload"
-                accept="video/*"
-            >
-
-            <input
-                type="text"
-                id="videoURL"
-                placeholder="Paste YouTube URL"
-            >
-
-            <button id="loadURLBtn">
-                Load URL
-            </button>
-
-        </section>
-
-
-        <!-- Video Player -->
-
-        <section class="video-container">
-
-            <video
-                id="video"
-                controls
-            ></video>
-
-            <div id="youtubePlayer"></div>
-
-        </section>
-
-
-        <!-- Frame Controls -->
-
-        <section class="frame-panel">
-
-            <h2>
-                Frame Controls
-            </h2>
-
-
-            <div class="frame-top-controls">
-
-
-                <div class="fps-selector">
-
-                    <label for="fpsSelect">
-                        FPS:
-                    </label>
-
-                    <select id="fpsSelect">
-
-                        <option value="30">
-                            30 FPS
-                        </option>
-
-                        <option value="60">
-                            60 FPS
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="frame-buttons">
-
-                    <button id="removeVideoBtn">
-                        Remove Video
-                    </button>
-
-                    <button id="captureBtn">
-                        Capture Screenshot
-                    </button>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="frame-controls">
-
-
-                <button id="previousFrame">
-                    -1f
-                </button>
-
-                <button id="nextFrame">
-                    +1f
-                </button>
-
-
-                <button id="back5">
-                    -5f
-                </button>
-
-                <button id="forward5">
-                    +5f
-                </button>
-
-
-                <button id="back10">
-                    -10f
-                </button>
-
-                <button id="forward10">
-                    +10f
-                </button>
-
-
-                <button id="back30">
-                    -30f
-                </button>
-
-                <button id="forward30">
-                    +30f
-                </button>
-
-
-                <button id="back1m">
-                    -1m
-                </button>
-
-                <button id="forward1m">
-                    +1m
-                </button>
-
-
-                <button id="back5m">
-                    -5m
-                </button>
-
-                <button id="forward5m">
-                    +5m
-                </button>
-
-
-            </div>
-
-
-            <div class="frame-info">
-
-                <p>
-
-                    <strong>
-                        Frame:
-                    </strong>
-
-                    <span id="frameNumber">
-                        0
-                    </span>
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        FPS:
-                    </strong>
-
-                    <span id="fps">
-                        30
-                    </span>
-
-                </p>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- Video Information -->
-
-        <section class="video-info">
-
-            <p>
-
-                <strong>
-                    Current Time:
-                </strong>
-
-                <span id="currentTime">
-                    00:00:00.000
-                </span>
-
-            </p>
-
-
-            <p>
-
-                <strong>
-                    Duration:
-                </strong>
-
-                <span id="duration">
-                    00:00:00.000
-                </span>
-
-            </p>
-
-        </section>
-
-
-    </section>
+    </header>
 
 
     <!-- =========================
-         Tools Sidebar
+         Main Layout
     ========================= -->
 
-    <aside class="sidebar">
+    <main class="container">
 
 
-        <!-- Notes -->
+        <!-- =========================
+             Video Workspace
+        ========================= -->
 
-        <section class="panel">
+        <section class="viewer">
 
-            <h2>
-                Notes
-            </h2>
 
-            <textarea
-                id="noteInput"
-                placeholder="Write a note..."
-                autocomplete="off"
-            ></textarea>
+            <!-- Video Sources -->
 
-            <button id="addNoteBtn">
-                Add Note
-            </button>
+            <section class="video-sources">
 
-            <ul id="notesList"></ul>
+                <input
+                    type="file"
+                    id="videoUpload"
+                    accept="video/*"
+                >
+
+                <input
+                    type="text"
+                    id="videoURL"
+                    placeholder="Paste YouTube URL"
+                >
+
+                <button id="loadURLBtn">
+                    Load URL
+                </button>
+
+            </section>
+
+
+            <!-- Video Player -->
+
+            <section class="video-container">
+
+                <video
+                    id="video"
+                    controls
+                ></video>
+
+                <div id="youtubePlayer"></div>
+
+            </section>
+
+
+            <!-- Frame Controls -->
+
+            <section class="frame-panel">
+
+                <h2>
+                    Frame Controls
+                </h2>
+
+
+                <div class="frame-top-controls">
+
+
+                    <div class="fps-selector">
+
+                        <label for="fpsSelect">
+                            FPS:
+                        </label>
+
+                        <select id="fpsSelect">
+
+                            <option value="30">
+                                30 FPS
+                            </option>
+
+                            <option value="60">
+                                60 FPS
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="frame-buttons">
+
+                        <button id="removeVideoBtn">
+                            Remove Video
+                        </button>
+
+                        <button id="captureBtn">
+                            Capture Screenshot
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- Frame Movement -->
+
+                <div class="frame-controls">
+
+                    <button id="previousFrame">
+                        -1f
+                    </button>
+
+                    <button id="nextFrame">
+                        +1f
+                    </button>
+
+                    <button id="back5">
+                        -5f
+                    </button>
+
+                    <button id="forward5">
+                        +5f
+                    </button>
+
+                    <button id="back10">
+                        -10f
+                    </button>
+
+                    <button id="forward10">
+                        +10f
+                    </button>
+
+                    <button id="back30">
+                        -30f
+                    </button>
+
+                    <button id="forward30">
+                        +30f
+                    </button>
+
+                    <button id="back1m">
+                        -1m
+                    </button>
+
+                    <button id="forward1m">
+                        +1m
+                    </button>
+
+                    <button id="back5m">
+                        -5m
+                    </button>
+
+                    <button id="forward5m">
+                        +5m
+                    </button>
+
+                </div>
+
+
+                <!-- Frame Information -->
+
+                <div class="frame-info">
+
+                    <p>
+                        <strong>Frame:</strong>
+
+                        <span id="frameNumber">
+                            0
+                        </span>
+                    </p>
+
+
+                    <p>
+                        <strong>FPS:</strong>
+
+                        <span id="fps">
+                            30
+                        </span>
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- Video Information -->
+
+            <section class="video-info">
+
+                <p>
+                    <strong>Current Time:</strong>
+
+                    <span id="currentTime">
+                        00:00:00.000
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Duration:</strong>
+
+                    <span id="duration">
+                        00:00:00.000
+                    </span>
+                </p>
+
+            </section>
+
 
         </section>
 
 
-        <!-- Screenshots -->
+        <!-- =========================
+             Sidebar
+        ========================= -->
 
-        <section class="panel">
-
-            <h2>
-                Screenshots
-            </h2>
-
-            <div id="screenshots"></div>
-
-        </section>
+        <aside class="sidebar">
 
 
-    </aside>
+            <!-- Notes -->
+
+            <section class="panel">
+
+                <h2>
+                    Notes
+                </h2>
+
+                <textarea
+                    id="noteInput"
+                    placeholder="Write a note..."
+                    autocomplete="off"
+                ></textarea>
+
+                <button id="addNoteBtn">
+                    Add Note
+                </button>
+
+                <ul id="notesList"></ul>
+
+            </section>
+
+
+            <!-- Screenshots -->
+
+            <section class="panel">
+
+                <h2>
+                    Screenshots
+                </h2>
+
+                <div id="screenshots"></div>
+
+            </section>
+
+
+        </aside>
+
+
+    </main>
 
 
     <!-- =========================
@@ -293,11 +299,17 @@
     ========================= -->
 
     <script src="js/video/video.js"></script>
+
     <script src="js/video/youtube.js"></script>
+
     <script src="js/analysis/playback.js"></script>
+
     <script src="js/analysis/frames.js"></script>
+
     <script src="js/research/notes.js"></script>
+
     <script src="js/research/screenshots.js"></script>
+
     <script src="js/app.js"></script>
 
 
