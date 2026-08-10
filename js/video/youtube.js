@@ -95,17 +95,14 @@ function loadYouTubeURL() {
 
 function loadYouTube(videoId) {
 
-    if (
-        typeof YT === "undefined" ||
-        typeof YT.Player !== "function"
-    ) {
+    if (!youtubeAPIReady) {
 
-        console.warn(
-            "YouTube API is not ready"
-        );
+    console.warn(
+        "YouTube API is not ready"
+    );
 
-        return;
-    }
+    return;
+}
 
 
     if (player) {
