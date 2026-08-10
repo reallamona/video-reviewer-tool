@@ -222,3 +222,30 @@ function updateFrameNumber() {
     }
 
 }
+
+/* =========================
+   Move By Frames
+========================= */
+
+function moveByFrames(frames) {
+
+    if (!fps) {
+
+        console.log(
+            "FPS is not set"
+        );
+
+        return;
+
+    }
+
+
+    const seconds =
+        frames / fps;
+
+
+    seekVideo(
+        getCurrentTime() + seconds
+    );
+
+}
