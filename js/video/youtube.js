@@ -1,11 +1,11 @@
 /* =========================
-   URL Import
+   YouTube
 ========================= */
 
-let player = null;
+let youtubePlayer = null;
 
-let videoURL;
-let loadURLBtn;
+let videoURL = null;
+let loadURLBtn = null;
 
 let youtubeTimeInterval = null;
 
@@ -14,11 +14,10 @@ let youtubeTimeInterval = null;
    Initialize
 ========================= */
 
-function initializeURLImport() {
+function initializeYouTube() {
 
     videoURL =
         document.getElementById("videoURL");
-
 
     loadURLBtn =
         document.getElementById("loadURLBtn");
@@ -42,17 +41,17 @@ function initializeURLImport() {
 
 function loadURLVideo() {
 
+    if (!videoURL) return;
+
+
     const url =
         videoURL.value.trim();
 
 
-    if (url === "") return;
+    if (!url) return;
 
 
-    if (
-        url.includes("youtube.com") ||
-        url.includes("youtu.be")
-    ) {
+    if (isYouTubeURL(url)) {
 
         loadYouTube(url);
 
@@ -61,29 +60,59 @@ function loadURLVideo() {
     }
 
 
-    // Load direct video URL
+    loadDirectVideo(url);
 
-    if (player) {
+}
 
-        player.destroy();
 
-        player = null;
+/* =========================
+   Check YouTube URL
+========================= */
+
+function isYouTubeURL(url) {
+
+    return (
+        url.includes("youtube.com") ||
+        url.includes("youtu.be")
+    );
+
+}
+
+
+/* =========================
+   Load Direct Video
+========================= */
+
+function loadDirectVideo(url) {
+
+    destroyYouTube();
+
+
+    const youtubeContainer =
+        document.getElementById(
+            "youtubePlayer"
+        );
+
+
+    if (youtubeContainer) {
+
+        youtubeContainer.style.display =
+            "none";
 
     }
 
 
-    document.getElementById(
-        "youtubePlayer"
-    ).style.display =
-        "none";
+    if (video) {
 
+        video.style.display =
+            "block";
 
-    video.style.display =
-        "block";
+        video.src =
+            url;
 
+        video.load();
 
-    video.src = url;
-
+    }
 
 }
 
@@ -100,7 +129,7 @@ function loadYouTube(url) {
 
     if (!id) {
 
-        console.log(
+        console.error(
             "Invalid YouTube URL"
         );
 
@@ -109,37 +138,63 @@ function loadYouTube(url) {
     }
 
 
-    // Hide local video
+    if (
+        typeof YT === "undefined" ||
+        !YT.Player
+    ) {
 
-    video.style.display =
-        "none";
+        console.error(
+            "YouTube API is not ready"
+        );
 
-
-    document.getElementById(
-        "youtubePlayer"
-    ).style.display =
-        "block";
-
-
-    video.pause();
-
-    video.removeAttribute(
-        "src"
-    );
-
-    video.load();
-
-
-    if (player) {
-
-        player.destroy();
-
-        player = null;
+        return;
 
     }
 
 
-    player =
+    destroyYouTube();
+
+
+    if (video) {
+
+        video.pause();
+
+        video.removeAttribute(
+            "src"
+        );
+
+        video.load();
+
+        video.style.display =
+            "none";
+
+    }
+
+
+    const youtubeContainer =
+        document.getElementById(
+            "youtubePlayer"
+        );
+
+
+    if (!youtubeContainer) {
+
+        console.error(
+            "YouTube player container not found"
+        );
+
+        return;
+
+    }
+
+
+    youtubeContainer.innerHTML = "";
+
+    youtubeContainer.style.display =
+        "block";
+
+
+    youtubePlayer =
         new YT.Player(
             "youtubePlayer",
             {
@@ -155,7 +210,8 @@ function loadYouTube(url) {
                 },
 
                 events: {
-                    onReady: youtubeReady
+                    onReady:
+                        youtubeReady
                 }
 
             }
@@ -175,11 +231,7 @@ function youtubeReady() {
     );
 
 
-    setTimeout(
-    updateYouTubeDuration,
-    500
-    
-    );
+    updateYouTubeDuration();
 
 
     if (youtubeTimeInterval) {
@@ -206,7 +258,15 @@ function youtubeReady() {
 
 function updateYouTubeTime() {
 
-    if (!player) return;
+    if (
+        !youtubePlayer ||
+        typeof youtubePlayer.getCurrentTime !==
+            "function"
+    ) {
+
+        return;
+
+    }
 
 
     const currentTime =
@@ -219,7 +279,7 @@ function updateYouTubeTime() {
 
         currentTime.textContent =
             formatTime(
-                player.getCurrentTime()
+                youtubePlayer.getCurrentTime()
             );
 
     }
@@ -233,7 +293,15 @@ function updateYouTubeTime() {
 
 function updateYouTubeDuration() {
 
-    if (!player) return;
+    if (
+        !youtubePlayer ||
+        typeof youtubePlayer.getDuration !==
+            "function"
+    ) {
+
+        return;
+
+    }
 
 
     const duration =
@@ -246,7 +314,7 @@ function updateYouTubeDuration() {
 
         duration.textContent =
             formatTime(
-                player.getDuration()
+                youtubePlayer.getDuration()
             );
 
     }
@@ -255,7 +323,53 @@ function updateYouTubeDuration() {
 
 
 /* =========================
-   Extract ID
+   Destroy YouTube
+========================= */
+
+function destroyYouTube() {
+
+    if (youtubeTimeInterval) {
+
+        clearInterval(
+            youtubeTimeInterval
+        );
+
+        youtubeTimeInterval =
+            null;
+
+    }
+
+
+    if (
+        youtubePlayer &&
+        typeof youtubePlayer.destroy ===
+            "function"
+    ) {
+
+        youtubePlayer.destroy();
+
+    }
+
+
+    youtubePlayer =
+        null;
+
+}
+
+
+/* =========================
+   Get YouTube Player
+========================= */
+
+function getYouTubePlayer() {
+
+    return youtubePlayer;
+
+}
+
+
+/* =========================
+   Extract YouTube ID
 ========================= */
 
 function getYouTubeID(url) {
