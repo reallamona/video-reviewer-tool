@@ -152,9 +152,9 @@ header h1 {
    Inputs
 ========================= */
 
-#videoUpload,
 #videoURL,
 .playback-options select {
+
     background: var(--panel);
 
     color: var(--text);
@@ -174,32 +174,96 @@ header h1 {
         background 0.15s ease;
 }
 
-#videoUpload:hover,
+
+/* =========================
+   Video File Input
+========================= */
+
+#videoUpload {
+
+    width: 100%;
+
+    color: var(--muted);
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+}
+
+
+/* File Button */
+
+#videoUpload::file-selector-button {
+
+    margin-right: 10px;
+
+    padding: 7px 11px;
+
+    background: var(--panel);
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+
+    border-radius: 6px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+}
+
+
+/* File Button Hover */
+
+#videoUpload::file-selector-button:hover {
+
+    background: var(--panel-hover);
+
+    border-color: var(--border-light);
+
+}
+
+
+/* Input Hover */
+
 #videoURL:hover,
 .playback-options select:hover {
+
     border-color: var(--border-light);
+
 }
+
 
 #videoURL {
     flex: 1;
-
     min-width: 0;
 }
+
 
 #videoURL::placeholder {
     color: var(--subtle);
 }
 
+
 #videoURL:focus,
 #noteInput:focus {
+
     outline: none;
 
     border-color: var(--accent);
 
     box-shadow:
-        0 0 0 2px rgba(79, 140, 255, 0.08);
+        0 0 0 2px
+        rgba(79, 140, 255, 0.08);
 }
-
 
 /* =========================
    Video
