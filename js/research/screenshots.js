@@ -18,37 +18,42 @@ let savedScreenshots = [];
 
 function initializeScreenshots() {
 
-
     canvas =
-        document.getElementById("canvas");
+        document.createElement("canvas");
 
 
     ctx =
         canvas.getContext("2d");
 
 
-
     captureBtn =
-        document.getElementById("captureBtn");
+        document.getElementById(
+            "captureBtn"
+        );
 
 
     screenshots =
-        document.getElementById("screenshots");
-
+        document.getElementById(
+            "screenshots"
+        );
 
 
     savedScreenshots =
         JSON.parse(
-            localStorage.getItem("screenshots")
+            localStorage.getItem(
+                "screenshots"
+            )
         ) || [];
 
 
+    if (captureBtn) {
 
-    captureBtn.addEventListener(
-        "click",
-        captureFrame
-    );
+        captureBtn.addEventListener(
+            "click",
+            captureFrame
+        );
 
+    }
 
 
     renderScreenshots();
