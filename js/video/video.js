@@ -253,3 +253,83 @@ function formatTime(seconds) {
     );
 
 }
+
+/* =========================
+   Remove Video
+========================= */
+
+function initializeRemoveVideo() {
+
+    const removeVideoBtn =
+        document.getElementById(
+            "removeVideoBtn"
+        );
+
+
+    if (!removeVideoBtn) {
+
+        console.error(
+            "Remove Video button not found"
+        );
+
+        return;
+
+    }
+
+
+    removeVideoBtn.addEventListener(
+        "click",
+        removeVideo
+    );
+
+}
+
+
+/* =========================
+   Remove Video
+========================= */
+
+function removeVideo() {
+
+    destroyYouTube();
+
+
+    releaseLocalVideo();
+
+
+    if (video) {
+
+        video.style.display =
+            "block";
+
+    }
+
+
+    if (videoUpload) {
+
+        videoUpload.value = "";
+
+    }
+
+
+    if (currentTimeText) {
+
+        currentTimeText.textContent =
+            "00:00:00.000";
+
+    }
+
+
+    if (durationText) {
+
+        durationText.textContent =
+            "00:00:00.000";
+
+    }
+
+
+    console.log(
+        "Video removed"
+    );
+
+}
