@@ -2,6 +2,7 @@
    Playback
 ========================= */
 
+
 /* =========================
    Check YouTube
 ========================= */
@@ -38,6 +39,15 @@ function getCurrentTime() {
         video
     ) {
 
+        return video.currentTime || 0;
+
+    }
+
+
+    return 0;
+
+}
+
 
 /* =========================
    Get Duration
@@ -47,7 +57,8 @@ function getDuration() {
 
     if (isYouTube()) {
 
-        return player.getDuration() || 0;
+        return getYouTubePlayer()
+            .getDuration() || 0;
 
     }
 
@@ -75,10 +86,11 @@ function seekVideo(time) {
 
     if (isYouTube()) {
 
-        player.seekTo(
-            time,
-            true
-        );
+        getYouTubePlayer()
+            .seekTo(
+                time,
+                true
+            );
 
         return;
 
