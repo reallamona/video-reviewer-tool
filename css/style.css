@@ -612,17 +612,6 @@ button:focus-visible {
 
 
 /* =========================
-   Primary Controls
-========================= */
-
-.frame-buttons button:hover {
-
-    border-color:
-        var(--accent);
-}
-
-
-/* =========================
    Remove Video
 ========================= */
 
