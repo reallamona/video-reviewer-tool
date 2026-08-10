@@ -8,10 +8,12 @@
 
 function isYouTube() {
 
+    const youtube =
+        getYouTubePlayer();
+
     return (
-        typeof player !== "undefined" &&
-        player !== null &&
-        typeof player.getCurrentTime === "function"
+        youtube !== null &&
+        typeof youtube.getCurrentTime === "function"
     );
 
 }
@@ -25,7 +27,8 @@ function getCurrentTime() {
 
     if (isYouTube()) {
 
-        return player.getCurrentTime();
+        return getYouTubePlayer()
+            .getCurrentTime();
 
     }
 
@@ -34,15 +37,6 @@ function getCurrentTime() {
         typeof video !== "undefined" &&
         video
     ) {
-
-        return video.currentTime || 0;
-
-    }
-
-
-    return 0;
-
-}
 
 
 /* =========================
