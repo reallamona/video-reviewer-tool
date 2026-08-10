@@ -81,11 +81,10 @@ function seekVideo(time) {
 
     if (isYouTube()) {
 
-        getYouTubePlayer()
-            .seekTo(
-                time,
-                true
-            );
+        player.seekTo(
+            Math.max(0, time),
+            true
+        );
 
         return;
 
@@ -98,7 +97,7 @@ function seekVideo(time) {
     ) {
 
         video.currentTime =
-            time;
+            Math.max(0, time);
 
     }
 
