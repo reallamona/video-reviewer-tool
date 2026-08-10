@@ -133,14 +133,17 @@ header h1 {
     min-width: 0;
 }
 
-
 /* =========================
    Video Sources
 ========================= */
 
 .video-sources {
+    display: grid;
 
-    display: flex;
+    grid-template-columns:
+        auto
+        minmax(200px, 1fr)
+        auto;
 
     align-items: center;
 
@@ -150,13 +153,10 @@ header h1 {
 
     background: var(--surface);
 
-    border:
-        1px solid var(--border);
+    border: 1px solid var(--border);
 
-    border-radius:
-        var(--radius);
+    border-radius: var(--radius);
 }
-
 
 /* =========================
    Inputs
