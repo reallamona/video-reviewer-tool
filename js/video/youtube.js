@@ -290,3 +290,47 @@ function getYouTubeID(url) {
         : null;
 
 }
+
+
+/* =========================
+   Destroy YouTube
+========================= */
+
+function destroyYouTube() {
+
+    if (youtubeTimeInterval) {
+
+        clearInterval(
+            youtubeTimeInterval
+        );
+
+        youtubeTimeInterval = null;
+
+    }
+
+
+    if (player) {
+
+        player.destroy();
+
+        player = null;
+
+    }
+
+
+    const youtubeContainer =
+        document.getElementById(
+            "youtubePlayer"
+        );
+
+
+    if (youtubeContainer) {
+
+        youtubeContainer.innerHTML = "";
+
+        youtubeContainer.style.display =
+            "none";
+
+    }
+
+}
