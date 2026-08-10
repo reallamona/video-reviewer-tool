@@ -3,12 +3,27 @@
 ========================= */
 
 let player = null;
+let youtubeAPIReady = false;
 
 let videoURL;
 let loadURLBtn;
 
 let youtubeTimeInterval = null;
 
+
+/* =========================
+   YouTube API Ready
+========================= */
+
+function onYouTubeIframeAPIReady() {
+
+    youtubeAPIReady = true;
+
+    console.log(
+        "YouTube API Ready"
+    );
+
+}
 
 /* =========================
    Initialize
