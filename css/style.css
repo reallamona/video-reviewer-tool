@@ -627,29 +627,16 @@ button:focus-visible {
 ========================= */
 
 #removeVideoBtn {
-
-    background:
-        transparent;
-
-    border-color:
-        var(--border);
-
-    color:
-        var(--muted);
+    background: var(--panel);
+    border-color: var(--border);
+    color: var(--text);
 }
 
 #removeVideoBtn:hover {
-
-    background:
-        rgba(214, 74, 74, 0.08);
-
-    border-color:
-        var(--danger);
-
-    color:
-        var(--danger-hover);
+    background: var(--panel-hover);
+    border-color: var(--border-light);
+    color: var(--text);
 }
-
 
 /* =========================
    Panels
