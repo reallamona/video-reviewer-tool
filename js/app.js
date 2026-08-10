@@ -11,12 +11,11 @@ document.addEventListener(
         );
 
 
-        initializePlayer();
+        initializeVideo();
+        initializeYouTube();
         initializeNotes();
         initializeScreenshots();
         initializeFrames();
-        initializeURLImport();
-        initializeRemoveVideo();
 
     }
 );
