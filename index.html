@@ -1,28 +1,24 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Video Reviewer</title>
 
     <link rel="stylesheet" href="css/style.css">
 
+
 </head>
 
-
 <body>
-
-
-<header>
-    <h1>Video Reviewer</h1>
-</header>
-
-
-
-<main class="container">
 
 
     <!-- =========================
@@ -39,14 +35,14 @@
             <input
                 type="file"
                 id="videoUpload"
-                accept="video/*">
-
+                accept="video/*"
+            >
 
             <input
                 type="text"
                 id="videoURL"
-                placeholder="Paste YouTube URL">
-
+                placeholder="Paste YouTube URL"
+            >
 
             <button id="loadURLBtn">
                 Load URL
@@ -55,21 +51,18 @@
         </section>
 
 
-
         <!-- Video Player -->
 
         <section class="video-container">
 
             <video
                 id="video"
-                controls>
-            </video>
-
+                controls
+            ></video>
 
             <div id="youtubePlayer"></div>
 
         </section>
-
 
 
         <!-- Frame Controls -->
@@ -80,41 +73,45 @@
                 Frame Controls
             </h2>
 
+
             <div class="frame-top-controls">
-                
+
+
                 <div class="fps-selector">
-                    
+
                     <label for="fpsSelect">
                         FPS:
                     </label>
-                
+
                     <select id="fpsSelect">
-                        
+
                         <option value="30">
                             30 FPS
                         </option>
-                        
+
                         <option value="60">
                             60 FPS
                         </option>
-                    
+
                     </select>
-                
+
                 </div>
-                
-            <div class="frame-buttons">
-                
-                <button id="removeVideoBtn">
-                    Remove Video
-                </button>
-                
-                <button id="captureBtn">
-                    Capture Screenshot
-                </button>
-            
+
+
+                <div class="frame-buttons">
+
+                    <button id="removeVideoBtn">
+                        Remove Video
+                    </button>
+
+                    <button id="captureBtn">
+                        Capture Screenshot
+                    </button>
+
+                </div>
+
+
             </div>
-    
-        </div>
 
 
             <div class="frame-controls">
@@ -177,11 +174,10 @@
             </div>
 
 
-
             <div class="frame-info">
 
-
                 <p>
+
                     <strong>
                         Frame:
                     </strong>
@@ -189,10 +185,12 @@
                     <span id="frameNumber">
                         0
                     </span>
+
                 </p>
 
 
                 <p>
+
                     <strong>
                         FPS:
                     </strong>
@@ -200,8 +198,8 @@
                     <span id="fps">
                         30
                     </span>
-                </p>
 
+                </p>
 
             </div>
 
@@ -209,13 +207,12 @@
         </section>
 
 
-
         <!-- Video Information -->
 
         <section class="video-info">
 
-
             <p>
+
                 <strong>
                     Current Time:
                 </strong>
@@ -223,11 +220,12 @@
                 <span id="currentTime">
                     00:00:00.000
                 </span>
+
             </p>
 
 
-
             <p>
+
                 <strong>
                     Duration:
                 </strong>
@@ -235,16 +233,13 @@
                 <span id="duration">
                     00:00:00.000
                 </span>
-            </p>
 
+            </p>
 
         </section>
 
 
     </section>
-
-
-
 
 
     <!-- =========================
@@ -258,45 +253,34 @@
 
         <section class="panel">
 
-
             <h2>
                 Notes
             </h2>
 
-
             <textarea
                 id="noteInput"
                 placeholder="Write a note..."
-                autocomplete="off">
-            </textarea>
-
+                autocomplete="off"
+            ></textarea>
 
             <button id="addNoteBtn">
                 Add Note
             </button>
 
-
             <ul id="notesList"></ul>
 
-
         </section>
-
-
-
 
 
         <!-- Screenshots -->
 
         <section class="panel">
 
-
             <h2>
                 Screenshots
             </h2>
 
-
             <div id="screenshots"></div>
-
 
         </section>
 
@@ -304,53 +288,17 @@
     </aside>
 
 
+    <!-- =========================
+         JavaScript
+    ========================= -->
 
-</main>
-
-
-
-
-
-<!-- Screenshot Canvas -->
-
-<canvas
-    id="canvas"
-    hidden>
-</canvas>
-
-
-
-
-
-<!-- YouTube API -->
-
-<script src="https://www.youtube.com/iframe_api"></script>
-
-
-<script>
-
-function onYouTubeIframeAPIReady() {
-
-    console.log("YouTube API Ready");
-
-}
-
-</script>
-
-
-
-
-
-<!-- Modules -->
-
-<script src="js/player.js"></script>
-<script src="js/video-controller.js"></script>
-<script src="js/notes.js"></script>
-<script src="js/screenshots.js"></script>
-<script src="js/frames.js"></script>
-<script src="js/url-import.js"></script>
-<script src="js/remove-video.js"></script>
-<script src="js/app.js"></script>
+    <script src="js/video/video.js"></script>
+    <script src="js/video/youtube.js"></script>
+    <script src="js/analysis/playback.js"></script>
+    <script src="js/analysis/frames.js"></script>
+    <script src="js/research/notes.js"></script>
+    <script src="js/research/screenshots.js"></script>
+    <script src="js/app.js"></script>
 
 
 </body>
