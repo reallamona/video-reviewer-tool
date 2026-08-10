@@ -31,58 +31,88 @@ let forward5mBtn;
 
 
 /* =========================
-   Initialize Frames
+   Initialize
 ========================= */
 
 function initializeFrames() {
 
     previousFrameBtn =
-        document.getElementById("previousFrame");
+        document.getElementById(
+            "previousFrame"
+        );
 
     nextFrameBtn =
-        document.getElementById("nextFrame");
+        document.getElementById(
+            "nextFrame"
+        );
 
 
     back5Btn =
-        document.getElementById("back5");
+        document.getElementById(
+            "back5"
+        );
 
     back10Btn =
-        document.getElementById("back10");
+        document.getElementById(
+            "back10"
+        );
 
     back30Btn =
-        document.getElementById("back30");
+        document.getElementById(
+            "back30"
+        );
 
     back1mBtn =
-        document.getElementById("back1m");
+        document.getElementById(
+            "back1m"
+        );
 
     back5mBtn =
-        document.getElementById("back5m");
+        document.getElementById(
+            "back5m"
+        );
 
 
     forward5Btn =
-        document.getElementById("forward5");
+        document.getElementById(
+            "forward5"
+        );
 
     forward10Btn =
-        document.getElementById("forward10");
+        document.getElementById(
+            "forward10"
+        );
 
     forward30Btn =
-        document.getElementById("forward30");
+        document.getElementById(
+            "forward30"
+        );
 
     forward1mBtn =
-        document.getElementById("forward1m");
+        document.getElementById(
+            "forward1m"
+        );
 
     forward5mBtn =
-        document.getElementById("forward5m");
+        document.getElementById(
+            "forward5m"
+        );
 
 
     frameNumberText =
-        document.getElementById("frameNumber");
+        document.getElementById(
+            "frameNumber"
+        );
 
     fpsDisplay =
-        document.getElementById("fps");
+        document.getElementById(
+            "fps"
+        );
 
     fpsSelect =
-        document.getElementById("fpsSelect");
+        document.getElementById(
+            "fpsSelect"
+        );
 
 
     setupFrameButtons();
@@ -103,47 +133,108 @@ function initializeFrames() {
 
 function setupFrameButtons() {
 
-    nextFrameBtn.onclick =
-        () => moveFrames(1);
+    if (nextFrameBtn) {
+
+        nextFrameBtn.onclick =
+            () => moveFrames(1);
+
+    }
 
 
-    previousFrameBtn.onclick =
-        () => moveFrames(-1);
+    if (previousFrameBtn) {
+
+        previousFrameBtn.onclick =
+            () => moveFrames(-1);
+
+    }
 
 
-    forward5Btn.onclick =
-        () => moveFrames(5);
+    if (forward5Btn) {
 
-    back5Btn.onclick =
-        () => moveFrames(-5);
+        forward5Btn.onclick =
+            () => moveFrames(5);
 
-
-    forward10Btn.onclick =
-        () => moveFrames(10);
-
-    back10Btn.onclick =
-        () => moveFrames(-10);
+    }
 
 
-    forward30Btn.onclick =
-        () => moveFrames(30);
+    if (back5Btn) {
 
-    back30Btn.onclick =
-        () => moveFrames(-30);
+        back5Btn.onclick =
+            () => moveFrames(-5);
 
-
-    forward1mBtn.onclick =
-        () => moveFrames(fps * 60);
-
-    back1mBtn.onclick =
-        () => moveFrames(-(fps * 60));
+    }
 
 
-    forward5mBtn.onclick =
-        () => moveFrames(fps * 300);
+    if (forward10Btn) {
 
-    back5mBtn.onclick =
-        () => moveFrames(-(fps * 300));
+        forward10Btn.onclick =
+            () => moveFrames(10);
+
+    }
+
+
+    if (back10Btn) {
+
+        back10Btn.onclick =
+            () => moveFrames(-10);
+
+    }
+
+
+    if (forward30Btn) {
+
+        forward30Btn.onclick =
+            () => moveFrames(30);
+
+    }
+
+
+    if (back30Btn) {
+
+        back30Btn.onclick =
+            () => moveFrames(-30);
+
+    }
+
+
+    if (forward1mBtn) {
+
+        forward1mBtn.onclick =
+            () => moveFrames(
+                fps * 60
+            );
+
+    }
+
+
+    if (back1mBtn) {
+
+        back1mBtn.onclick =
+            () => moveFrames(
+                -(fps * 60)
+            );
+
+    }
+
+
+    if (forward5mBtn) {
+
+        forward5mBtn.onclick =
+            () => moveFrames(
+                fps * 300
+            );
+
+    }
+
+
+    if (back5mBtn) {
+
+        back5mBtn.onclick =
+            () => moveFrames(
+                -(fps * 300)
+            );
+
+    }
 
 }
 
@@ -153,6 +244,9 @@ function setupFrameButtons() {
 ========================= */
 
 function setupFPSSelector() {
+
+    if (!fpsSelect) return;
+
 
     fpsSelect.addEventListener(
         "change",
@@ -164,8 +258,12 @@ function setupFPSSelector() {
                 );
 
 
-            fpsDisplay.textContent =
-                fps;
+            if (fpsDisplay) {
+
+                fpsDisplay.textContent =
+                    fps;
+
+            }
 
 
             updateFrameNumber();
@@ -182,7 +280,11 @@ function setupFPSSelector() {
 
 function moveFrames(amount) {
 
-    if (!isYouTube()) {
+    if (
+        !isYouTube() &&
+        typeof video !== "undefined" &&
+        video
+    ) {
 
         video.pause();
 
@@ -190,6 +292,34 @@ function moveFrames(amount) {
 
 
     moveByFrames(amount);
+
+}
+
+
+/* =========================
+   Move By Frames
+========================= */
+
+function moveByFrames(frames) {
+
+    if (!fps) {
+
+        console.log(
+            "FPS is not set"
+        );
+
+        return;
+
+    }
+
+
+    const seconds =
+        frames / fps;
+
+
+    seekVideo(
+        getCurrentTime() + seconds
+    );
 
 }
 
@@ -220,32 +350,5 @@ function updateFrameNumber() {
             fps;
 
     }
-
-}
-
-/* =========================
-   Move By Frames
-========================= */
-
-function moveByFrames(frames) {
-
-    if (!fps) {
-
-        console.log(
-            "FPS is not set"
-        );
-
-        return;
-
-    }
-
-
-    const seconds =
-        frames / fps;
-
-
-    seekVideo(
-        getCurrentTime() + seconds
-    );
 
 }
