@@ -280,19 +280,42 @@ function setupFPSSelector() {
 
 function moveFrames(amount) {
 
+    /*
+        Do nothing if no video is loaded
+    */
+
     if (
-        !isYouTube() &&
-        typeof video !== "undefined" &&
-        video
+        typeof isYouTube === "function" &&
+        isYouTube()
     ) {
 
-        video.pause();
+        // YouTube video is loaded
+        moveByFrames(amount);
+
+        return;
 
     }
 
 
-    moveByFrames(amount);
+    /*
+        Local video
+    */
 
+    if (
+        typeof video === "undefined" ||
+        !video ||
+        !video.src
+    ) {
+
+        return;
+
+    }
+
+
+    video.pause();
+
+
+    moveByFrames(amount);
 }
 
 
