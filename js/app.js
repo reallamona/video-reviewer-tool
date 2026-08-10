@@ -12,7 +12,9 @@ document.addEventListener(
 
 
         initializeVideo();
+        initializeRemoveVideo();
         initializeYouTube();
+
         initializeNotes();
         initializeScreenshots();
         initializeFrames();
