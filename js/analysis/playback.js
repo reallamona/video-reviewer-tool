@@ -54,8 +54,7 @@ function getDuration() {
 
     if (isYouTube()) {
 
-        return getYouTubePlayer()
-            .getDuration() || 0;
+        return player.getDuration();
 
     }
 
@@ -73,7 +72,6 @@ function getDuration() {
     return 0;
 
 }
-
 
 /* =========================
    Seek Video
