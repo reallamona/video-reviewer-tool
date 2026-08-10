@@ -27,8 +27,7 @@ function getCurrentTime() {
 
     if (isYouTube()) {
 
-        return getYouTubePlayer()
-            .getCurrentTime();
+        return player.getCurrentTime();
 
     }
 
@@ -46,7 +45,6 @@ function getCurrentTime() {
     return 0;
 
 }
-
 
 /* =========================
    Get Duration
