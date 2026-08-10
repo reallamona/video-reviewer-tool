@@ -1,7 +1,6 @@
 /* =========================
-   Video Controller
+   Playback
 ========================= */
-
 
 /* =========================
    Check YouTube
@@ -11,7 +10,8 @@ function isYouTube() {
 
     return (
         typeof player !== "undefined" &&
-        player !== null
+        player !== null &&
+        typeof player.getCurrentTime === "function"
     );
 
 }
@@ -30,9 +30,12 @@ function getCurrentTime() {
     }
 
 
-    if (video) {
+    if (
+        typeof video !== "undefined" &&
+        video
+    ) {
 
-        return video.currentTime;
+        return video.currentTime || 0;
 
     }
 
@@ -50,12 +53,15 @@ function getDuration() {
 
     if (isYouTube()) {
 
-        return player.getDuration();
+        return player.getDuration() || 0;
 
     }
 
 
-    if (video) {
+    if (
+        typeof video !== "undefined" &&
+        video
+    ) {
 
         return video.duration || 0;
 
@@ -85,7 +91,10 @@ function seekVideo(time) {
     }
 
 
-    if (video) {
+    if (
+        typeof video !== "undefined" &&
+        video
+    ) {
 
         video.currentTime =
             time;
