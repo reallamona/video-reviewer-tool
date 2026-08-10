@@ -1,20 +1,21 @@
 /* =========================
-   Video Player
+   Local Video
 ========================= */
 
-let video;
-let videoUpload;
-let currentTimeText;
-let durationText;
+let video = null;
+let videoUpload = null;
+
+let currentTimeText = null;
+let durationText = null;
 
 let localVideoURL = null;
 
 
 /* =========================
-   Initialize Player
+   Initialize
 ========================= */
 
-function initializePlayer() {
+function initializeVideo() {
 
     video =
         document.getElementById("video");
@@ -33,7 +34,7 @@ function initializePlayer() {
 
         videoUpload.addEventListener(
             "change",
-            loadVideo
+            loadLocalVideo
         );
 
     }
@@ -49,39 +50,51 @@ function initializePlayer() {
 
 
 /* =========================
-   Add Video Events
+   Video Events
 ========================= */
 
 function addVideoListeners() {
 
     video.addEventListener(
         "loadedmetadata",
-        () => {
-
-            if (durationText) {
-
-                durationText.textContent =
-                    formatTime(video.duration);
-
-            }
-
-        }
+        updateVideoDuration
     );
 
 
     video.addEventListener(
         "timeupdate",
-        () => {
-
-            if (currentTimeText) {
-
-                currentTimeText.textContent =
-                    formatTime(video.currentTime);
-
-            }
-
-        }
+        updateVideoTime
     );
+
+}
+
+
+/* =========================
+   Update Duration
+========================= */
+
+function updateVideoDuration() {
+
+    if (!durationText) return;
+
+
+    durationText.textContent =
+        formatTime(video.duration);
+
+}
+
+
+/* =========================
+   Update Time
+========================= */
+
+function updateVideoTime() {
+
+    if (!currentTimeText) return;
+
+
+    currentTimeText.textContent =
+        formatTime(video.currentTime);
 
 }
 
@@ -90,51 +103,16 @@ function addVideoListeners() {
    Load Local Video
 ========================= */
 
-function loadVideo(event) {
+function loadLocalVideo(event) {
 
     const file =
         event.target.files[0];
 
 
-    if (!file) return;
+    if (!file || !video) return;
 
 
-    // Remove YouTube
-
-    if (typeof player !== "undefined" && player) {
-
-        player.destroy();
-
-        player = null;
-
-    }
-
-
-    const youtubePlayer =
-        document.getElementById(
-            "youtubePlayer"
-        );
-
-
-    if (youtubePlayer) {
-
-        youtubePlayer.innerHTML = "";
-
-        youtubePlayer.style.display =
-            "none";
-
-    }
-
-
-    // Release previous file memory
-
-    if (localVideoURL) {
-
-        URL.revokeObjectURL(
-            localVideoURL
-        );
-
-    }
+    releaseLocalVideo();
 
 
     localVideoURL =
@@ -155,20 +133,92 @@ function loadVideo(event) {
 
 
 /* =========================
-   Time Format
+   Release Local Video
+========================= */
+
+function releaseLocalVideo() {
+
+    if (!video) return;
+
+
+    video.pause();
+
+
+    video.removeAttribute(
+        "src"
+    );
+
+
+    video.load();
+
+
+    if (localVideoURL) {
+
+        URL.revokeObjectURL(
+            localVideoURL
+        );
+
+        localVideoURL = null;
+
+    }
+
+}
+
+
+/* =========================
+   Remove Local Video
+========================= */
+
+function removeLocalVideo() {
+
+    releaseLocalVideo();
+
+
+    if (videoUpload) {
+
+        videoUpload.value = "";
+
+    }
+
+
+    if (currentTimeText) {
+
+        currentTimeText.textContent =
+            "00:00:00.000";
+
+    }
+
+
+    if (durationText) {
+
+        durationText.textContent =
+            "00:00:00.000";
+
+    }
+
+}
+
+
+/* =========================
+   Format Time
 ========================= */
 
 function formatTime(seconds) {
 
-    if (!seconds || isNaN(seconds)) {
+    if (
+        !seconds ||
+        isNaN(seconds)
+    ) {
 
-        return "00:00:00:000";
+        return "00:00:00.000";
 
     }
 
 
     const hours =
-        Math.floor(seconds / 3600);
+        Math.floor(
+            seconds / 3600
+        );
 
 
     const minutes =
@@ -178,7 +228,9 @@ function formatTime(seconds) {
 
 
     const secs =
-        Math.floor(seconds % 60);
+        Math.floor(
+            seconds % 60
+        );
 
 
     const milliseconds =
