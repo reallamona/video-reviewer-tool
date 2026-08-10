@@ -9,12 +9,11 @@
 
 function isYouTube() {
 
-    const youtube =
-        getYouTubePlayer();
-
     return (
-        youtube !== null &&
-        typeof youtube.getCurrentTime === "function"
+        typeof player !== "undefined" &&
+        player !== null &&
+        typeof player.getCurrentTime === "function" &&
+        typeof player.seekTo === "function"
     );
 
 }
